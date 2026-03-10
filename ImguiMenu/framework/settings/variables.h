@@ -10,10 +10,6 @@ struct section_data
 	std::string text;
 };
 
-struct IDirect3DDevice9;
-struct ID3D11Device;
-struct ID3D11DeviceContext;
-
 class c_variables
 {
 public:
@@ -43,7 +39,7 @@ public:
 		int active_section{ 0 };
 		float section_alpha{ 0 };
 
-		IDirect3DDevice9* g_pd3dDevice = nullptr;
+		// NOTE: g_pd3dDevice removed - not used in OpenGL mode
 
 		ImVec2 icon{ 21,22 };
 		float line{ 21 };
@@ -63,8 +59,10 @@ public:
 
 	} gui;
 
-	ID3D11Device* device;
-	ID3D11DeviceContext* context;
+	// OpenGL mode: no DX11 device/context needed
+	// Kept as void* for blur.h compatibility (stubs)
+	void* device = nullptr;
+	void* context = nullptr;
 
 	gui_style style;
 
